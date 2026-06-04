@@ -1,11 +1,13 @@
 import psycopg2
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
+import os
 
-# 나눔고딕 폰트 직접 경로 지정
-font_path = '/Users/jung/Library/Fonts/NanumGothic-Regular.ttf'
-fm.fontManager.addfont(font_path)
-plt.rcParams['font.family'] = 'NanumGothic'
+# 나눔고딕 폰트 설정 (없으면 기본 폰트 사용)
+font_path = os.path.expanduser('~/Library/Fonts/NanumGothic-Regular.ttf')
+if os.path.exists(font_path):
+    fm.fontManager.addfont(font_path)
+    plt.rcParams['font.family'] = 'NanumGothic'
 
 # DB 연결 (로컬 실행용 — docker-compose up db 실행 후 사용)
 # Docker 컨테이너 안에서 실행할 경우 host="db"로 변경 필요
@@ -32,7 +34,7 @@ plt.close()
 print("차트 1 저장 완료!")
 
 # 차트 2: 유저별 총 이벤트 수 (막대 차트)
-cursor.execute("SELECT user_id, COUNT(*) FROM events GROUP BY user_id ORDER BY count DESC")
+cursor.execute("SELECT user_id, COUNT(*) FROM events GROUP BY user_id ORDER BY COUNT(*) DESC")
 rows = cursor.fetchall()
 users = [row[0] for row in rows]
 counts = [row[1] for row in rows]
@@ -47,7 +49,7 @@ plt.close()
 print("차트 2 저장 완료!")
 
 # 차트 3: 강의별 평균 시청 시간 (막대 차트)
-cursor.execute("SELECT video_id, AVG(watch_seconds) FROM video_play_events GROUP BY video_id ORDER BY avg DESC")
+cursor.execute("SELECT video_id, AVG(watch_seconds) FROM video_play_events GROUP BY video_id ORDER BY AVG(watch_seconds) DESC")
 rows = cursor.fetchall()
 videos = [row[0] for row in rows]
 avgs = [float(row[1]) for row in rows]
