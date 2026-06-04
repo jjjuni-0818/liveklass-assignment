@@ -77,9 +77,9 @@ python3 src/visualize.py    # 터미널 2
 ```
 
 차트 파일 3개가 생성됩니다:
-- `chart_event_type.png` — 이벤트 타입별 발생 횟수 (파이 차트)
-- `chart_user_events.png` — 유저별 총 이벤트 수 (막대 차트)
-- `chart_video_avg.png` — 강의별 평균 시청 시간 (막대 차트)
+- `charts/chart_event_type.png` — 이벤트 타입별 발생 횟수 (파이 차트)
+- `charts/chart_user_events.png` — 유저별 총 이벤트 수 (막대 차트)
+- `charts/chart_video_avg.png` — 강의별 평균 시청 시간 (막대 차트)
 
 ---
 
