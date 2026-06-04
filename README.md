@@ -52,8 +52,8 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # DB가 실행 중인 상태에서
-docker-compose up db  # 터미널 1
-python3 visualize.py  # 터미널 2
+docker-compose up db        # 터미널 1
+python3 src/visualize.py    # 터미널 2
 ```
 
 차트 파일 3개가 생성됩니다:
@@ -123,6 +123,21 @@ Mac에서 `pip install`을 시도했을 때 시스템 패키지 충돌 경고가
 ### 4. 한글 폰트 문제
 
 matplotlib 기본 폰트가 한글을 지원하지 않아 차트 제목이 깨졌습니다. 나눔고딕 폰트를 설치하고 폰트 경로를 직접 지정해서 해결했습니다.
+
+---
+
+## AWS 아키텍처 (선택 과제 B)
+
+이 파이프라인을 AWS로 운영한다면 아래와 같이 구성할 수 있습니다.
+
+![AWS Architecture](charts/aws_architecture.png)
+
+| 현재 구현 | AWS 서비스 | 이유 |
+|-----------|-----------|------|
+| generator.py | AWS Lambda | 서버 없이 이벤트 수집 함수 실행 |
+| PostgreSQL | Amazon RDS | 관리형 PostgreSQL, 자동 백업 |
+| docker-compose | Amazon ECS | 컨테이너 기반 앱 실행 관리 |
+| visualize.py | Amazon QuickSight | SQL 연결해서 대시보드 자동 생성 |
 
 ---
 
