@@ -25,7 +25,13 @@ def generate_event():
         # 에러 이벤트일 때만 추가되는 필드
         event["error_code"] = random.choice([400, 403, 404, 500, 503])  # 실제 HTTP 에러 코드
         event["error_message"] = random.choice(["Not Found", "Server Error", "Forbidden"])
-        event["page_url"] = random.choice(["/home", "/course", "/video", "/profile"])  # 어느 페이지에서 발생했는지
+        event["page_url"] = random.choice([
+            "/dashboard",    # 강사 대시보드
+            "/course/live",  # 라이브 강의 페이지
+            "/course/vod",   # VOD 강의 페이지
+            "/payment",      # 결제 페이지
+            "/mypage",       # 수강생 마이페이지
+        ])  # 라이브클래스 서비스의 실제 주요 페이지 기반
     
     return event  # 완성된 이벤트 딕셔너리 반환
 
