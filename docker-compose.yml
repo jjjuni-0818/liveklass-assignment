@@ -1,26 +1,31 @@
-version: '3.8'
-
 services:
   db:
-    image: postgres          # 사용할 이미지
+    image: postgres
     container_name: liveklass-db
     environment:
       POSTGRES_DB: liveklass
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     ports:
-      - "5432:5432"          # 내 컴퓨터:컨테이너 포트 연결
+      - "5432:5432"
     volumes:
       - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql  # 시작할 때 테이블 자동 생성
+    healthcheck:
+      # DB가 실제로 쿼리를 받을 준비가 됐는지 확인
+      test: ["CMD-SHELL", "pg_isready -U postgres -d liveklass"]
+      interval: 5s   # 5초마다 체크
+      timeout: 5s    # 5초 안에 응답 없으면 실패
+      retries: 5     # 5번 실패하면 unhealthy
 
   app:
     image: python:3.11
     container_name: liveklass-app
     working_dir: /app
     volumes:
-      - .:/app               # 현재 폴더를 컨테이너 안으로 연결
+      - .:/app
     command: >
       bash -c "pip install psycopg2-binary &&
                python src/generator.py"
     depends_on:
-      - db                   # db가 먼저 실행된 후에 app 실행
+      db:
+        condition: service_healthy  # db가 healthy 상태일 때만 app 실행

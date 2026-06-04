@@ -7,7 +7,8 @@ font_path = '/Users/jung/Library/Fonts/NanumGothic-Regular.ttf'
 fm.fontManager.addfont(font_path)
 plt.rcParams['font.family'] = 'NanumGothic'
 
-# DB 연결
+# DB 연결 (로컬 실행용 — docker-compose up db 실행 후 사용)
+# Docker 컨테이너 안에서 실행할 경우 host="db"로 변경 필요
 conn = psycopg2.connect(
     host="localhost",
     port=5432,
