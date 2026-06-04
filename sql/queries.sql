@@ -13,4 +13,4 @@ ORDER BY COUNT(*) DESC;
 SELECT video_id, AVG(watch_seconds)
 FROM video_play_events
 GROUP BY video_id
-ORDER BY avg DESC;
+ORDER BY AVG(watch_seconds) DESC;
