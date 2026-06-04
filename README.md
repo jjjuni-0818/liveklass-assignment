@@ -113,13 +113,13 @@ GROUP BY event_type;
 SELECT user_id, COUNT(*)
 FROM events
 GROUP BY user_id
-ORDER BY count DESC;
+ORDER BY COUNT(*) DESC;
 
 -- 3. 강의별 평균 시청 시간
 SELECT video_id, AVG(watch_seconds)
 FROM video_play_events
 GROUP BY video_id
-ORDER BY avg DESC;
+ORDER BY AVG(watch_seconds) DESC;
 ```
 
 ---
