@@ -111,4 +111,4 @@ def index():
     return render_template_string(html, chart1=chart1, chart2=chart2, chart3=chart3)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5001)

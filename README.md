@@ -81,7 +81,7 @@ docker-compose up db
 # 대시보드 실행 (터미널 2)
 python3 src/app.py
 ```
-브라우저에서 `http://localhost:5000` 접속하면 분석 차트 3개를 대시보드로 확인할 수 있습니다.
+브라우저에서 `http://localhost:5001` 접속하면 분석 차트 3개를 대시보드로 확인할 수 있습니다.
 
 ---
 
