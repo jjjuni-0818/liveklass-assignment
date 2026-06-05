@@ -144,10 +144,10 @@ ORDER BY AVG(watch_seconds) DESC;
 
 | 현재 구현 | AWS 서비스 | 선택 이유 |
 |-----------|-----------|---------|
-| generator.py | AWS Lambda | 이벤트는 유저 행동이 있을 때만 발생하므로 항상 켜두는 서버가 필요 없음. 실행 시에만 비용이 발생해 효율적 |
-| PostgreSQL | Amazon RDS | 현재 PostgreSQL을 그대로 마이그레이션 가능. 자동 백업과 스케일 업 지원으로 운영 부담 감소 |
-| Docker Compose | Amazon ECS | 현재 Docker 기반 구조를 그대로 클라우드에서 실행 가능. Fargate 사용 시 서버 관리 없이 컨테이너 운영 |
-| Flask 대시보드 | Amazon QuickSight | RDS에 직접 연결해 실시간 대시보드 제공. 별도 서버 없이 데이터 시각화 가능 |
+| generator.py | AWS Lambda | 이벤트는 유저가 뭔가 할 때만 생기는 거라서 24시간 서버를 켜둘 필요가 없음. 필요할 때만 실행되는 Lambda가 맞는 것 같아서 선택 |
+| Docker PostgreSQL | Amazon RDS | 지금 쓰는 PostgreSQL 그대로 올릴 수 있고, 직접 관리 안 해도 돼서 선택 |
+| docker-compose | Amazon ECS | 지금 Docker Compose로 컨테이너 띄우는 구조를 그대로 클라우드에 올릴 수 있어서 선택 |
+| Flask 대시보드 | Amazon QuickSight | RDS랑 연결하면 Flask 서버 따로 안 켜도 차트를 볼 수 있어서 선택 |
 
 ---
 
